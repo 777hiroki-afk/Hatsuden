@@ -1,0 +1,14 @@
+# 認証情報（絶対にコミットしない）
+secrets.py
+*.secret
+.env
+
+# 実行時に生成されるファイル
+notifier_state.json
+solar_data.csv
+*.log
+
+# Python
+__pycache__/
+*.pyc
+.venv/
