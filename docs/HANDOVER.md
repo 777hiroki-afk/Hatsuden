@@ -8,9 +8,9 @@ ECHONET Liteでデータを取得し、CSV保存・Gmail通知を行うシステ
 
 ### PC環境
 - OS: Windows
-- ユーザー名: 777hi
+- ユーザー名: Tumu N（スペースあり。スクリプトは %USERPROFILE% / $env:USERPROFILE で参照する）
 - Python: python コマンドで実行可能
-- 作業フォルダ: `C:\Users\777hi\OneDrive\パワコンデータ取得`
+- 作業フォルダ: `C:\Users\Tumu N\OneDrive\パワコンデータ取得`
 
 ### ネットワーク構成
 ```
@@ -40,7 +40,7 @@ TP-Linkルーター（現在、パワコンのLANケーブルを刺し替え済�
 
 ## 既存ファイル
 
-`C:\Users\777hi\OneDrive\パワコンデータ取得\` に以下が存在：
+`C:\Users\Tumu N\OneDrive\パワコンデータ取得\` に以下が存在：
 
 1. **find_echonet.py** - ECHONET Liteデバイス探索スクリプト
 2. **get_objects.py** - パワコンの各EPCから値を取得して表示
@@ -59,8 +59,8 @@ start_solar.bat を Windows起動時（ログオン時）に自動実行する�
 ### 要件
 - タスク名: `SolarMonitor`
 - トリガー: ユーザーログオン時
-- 実行するプログラム: `C:\Users\777hi\OneDrive\パワコンデータ取得\start_solar.bat`
-- 作業フォルダ: `C:\Users\777hi\OneDrive\パワコンデータ取得`
+- 実行するプログラム: `C:\Users\Tumu N\OneDrive\パワコンデータ取得\start_solar.bat`
+- 作業フォルダ: `C:\Users\Tumu N\OneDrive\パワコンデータ取得`
 - AC電源判定なし（バッテリー駆動時も実行）
 - 実行時間制限なし（3日で止まらないように）
 - 既に同名タスクがある場合は上書き
