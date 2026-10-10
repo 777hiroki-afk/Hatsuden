@@ -79,8 +79,8 @@ if ($Unregister) {
 }
 
 # --- 入力チェック ---
-$wake = [datetime]::ParseExact($WakeTime, 'HH:mm', $null)
-$until = [datetime]::ParseExact($AwakeUntil, 'HH:mm', $null)
+$wake = [datetime]::ParseExact($WakeTime, 'H:mm', [cultureinfo]::InvariantCulture)
+$until = [datetime]::ParseExact($AwakeUntil, 'H:mm', [cultureinfo]::InvariantCulture)
 if ($until -le $wake) {
     throw "AwakeUntil ($AwakeUntil) は WakeTime ($WakeTime) より後の時刻にしてください。"
 }

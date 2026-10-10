@@ -24,7 +24,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-$end = [datetime]::ParseExact($Until, 'HH:mm', $null)
+$end = [datetime]::ParseExact($Until, 'H:mm', [cultureinfo]::InvariantCulture)
 
 # --- モニタリングを起動（二重起動防止は start_solar.bat 側） ---
 $batPath = Join-Path $PSScriptRoot 'start_solar.bat'
