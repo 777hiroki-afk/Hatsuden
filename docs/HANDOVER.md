@@ -52,6 +52,11 @@ TP-Linkルーター（現在、パワコンのLANケーブルを刺し替え済�
 8. **solar_data.csv** - solar_logger.pyが生成するデータCSV
 9. **start_solar.bat** - solar_logger.pyとsmart_notifier.pyを同時起動するバッチ
 
+## 進行中：スリープ解除スケジューリング
+
+毎日決まった時刻に PC をスリープから起こすタスク `SolarWake` を実装済み・Windows 上で未検証。
+詳細と次の手順は [HANDOVER_WAKE.md](HANDOVER_WAKE.md) を参照。
+
 ## 現在のタスク：タスクスケジューラ登録の自動化
 
 start_solar.bat を Windows起動時（ログオン時）に自動実行するタスクを登録したい。
