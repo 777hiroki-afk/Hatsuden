@@ -31,7 +31,7 @@ PC がスリープすると `solar_logger.py`（5 分ごと）と `smart_notifie
 
 ## 次のセッション（PC ローカル）でやること
 
-1. ブランチの最新を作業フォルダ `C:\Users\777hi\OneDrive\パワコンデータ取得` に反映
+1. ブランチの最新を作業フォルダ `C:\Users\Tumu N\OneDrive\パワコンデータ取得` に反映
    - git 管理でなければ raw から取得（リポジトリは public）:
      ```powershell
      cd "$env:USERPROFILE\OneDrive\パワコンデータ取得"
