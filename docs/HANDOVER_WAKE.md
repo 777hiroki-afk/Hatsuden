@@ -70,3 +70,14 @@ PC がスリープすると `solar_logger.py`（5 分ごと）と `smart_notifie
 
 `.ps1` / `.bat` は CRLF。`.ps1` は日本語を含むので UTF-8 **BOM 付き**で保存すること（Windows PowerShell 5.1 が BOM なしを Shift-JIS と誤認する）。
 `.gitattributes` で `*.ps1 -text` 指定済み。
+
+## スマホから任意のタイミングで起こす（Wake-on-LAN）
+
+PC（有線 `イーサネット` = Realtek PCIe GbE Family Controller）で設定済み（2026-10-11）:
+
+- `Set-NetAdapterPowerManagement -WakeOnMagicPacket Enabled`、`powercfg /deviceenablewake` 済み（`wake_armed` に表示される）
+- 詳細設定: Wake on Magic Packet / Shutdown Wake-On-Lan = Enabled
+- `powercfg /a`: スタンバイ (S3) 対応・モダンスタンバイ非対応 → スリープ解除タイマーも WoL も効く。高速スタートアップは無効
+- スマホアプリには MAC（PC で `Get-NetAdapter` で確認）、ブロードキャスト `255.255.255.255`、ポート 9 を登録
+- 外出先から起こすには家の中の中継（ルーターの WoL / VPN / 将来の Home Assistant）が必要
+- 未対応: WoL で起きた後は約 2 分で再スリープする（`stay_awake.ps1` を起動する仕組みは未実装）
