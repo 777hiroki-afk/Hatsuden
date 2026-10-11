@@ -1,30 +1,43 @@
 ﻿<#
 .SYNOPSIS
-    スリープ解除タスク "SolarWake" から呼ばれ、指定時刻まで PC をスリープさせないようにします。
+    スリープ解除後に呼ばれ、指定時刻（または指定分数）まで PC をスリープさせないようにします。
 
 .DESCRIPTION
     1. start_solar.bat を実行して solar_logger.py / smart_notifier.py を確実に起動する
        （既に動いていれば start_solar.bat 側でスキップされる）
-    2. SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED) で -Until の時刻まで
+    2. SetThreadExecutionState(ES_CONTINUOUS | ES_SYSTEM_REQUIRED) で終了時刻まで
        アイドルスリープを抑止する。画面は消えてよいので ES_DISPLAY_REQUIRED は付けない。
-    スリープ解除タイマーで起きた直後は、操作が無いと約 2 分で再スリープするため、この抑止が必要。
+    スリープ解除タイマーや Wake-on-LAN で起きた直後は、操作が無いと約 2 分で再スリープするため、この抑止が必要。
     このスクリプトが終了すると抑止は解除され、通常の電源設定どおりスリープに戻る。
+    呼び出し元: タスク "SolarWake"（-Until）、タスク "SolarResume"（-Minutes）
 
 .PARAMETER Until
     この時刻 (HH:mm) までスリープを抑止します。既に過ぎていれば起動だけして終了します。
 
+.PARAMETER Minutes
+    今から指定分数だけスリープを抑止します。
+
 .EXAMPLE
     powershell -NoProfile -ExecutionPolicy Bypass -File .\stay_awake.ps1 -Until 19:00
+    powershell -NoProfile -ExecutionPolicy Bypass -File .\stay_awake.ps1 -Minutes 60
 #>
-[CmdletBinding()]
+[CmdletBinding(DefaultParameterSetName = 'Until')]
 param(
-    [Parameter(Mandatory = $true)]
-    [string]$Until
+    [Parameter(Mandatory = $true, ParameterSetName = 'Until')]
+    [string]$Until,
+
+    [Parameter(Mandatory = $true, ParameterSetName = 'Minutes')]
+    [ValidateRange(1, 1440)]
+    [int]$Minutes
 )
 
 $ErrorActionPreference = 'Stop'
 
-$end = [datetime]::ParseExact($Until, 'H:mm', [cultureinfo]::InvariantCulture)
+if ($PSCmdlet.ParameterSetName -eq 'Minutes') {
+    $end = (Get-Date).AddMinutes($Minutes)
+} else {
+    $end = [datetime]::ParseExact($Until, 'H:mm', [cultureinfo]::InvariantCulture)
+}
 
 # --- モニタリングを起動（二重起動防止は start_solar.bat 側） ---
 $batPath = Join-Path $PSScriptRoot 'start_solar.bat'
