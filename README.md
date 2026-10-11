@@ -85,11 +85,11 @@ powercfg /requests                # 抑止中は SYSTEM 欄に powershell.exe �
 ## スリープ復帰後に一定時間起こしておく（スマホからの Wake-on-LAN 用）
 
 スマホ（Mocha WOL 等）で起こした PC は、無操作だと約 2 分で再スリープする。
-`scripts/register_resume_task.ps1` で、スリープ復帰のたびに `stay_awake.ps1 -Minutes 20` を実行するタスク `SolarResume` を登録する
+`scripts/register_resume_task.ps1` で、スリープ復帰のたびに `stay_awake.ps1 -Minutes 10` を実行するタスク `SolarResume` を登録する
 （復帰時のイベント System / Microsoft-Windows-Power-Troubleshooter / ID 1 がトリガー。復帰の原因は区別しない）。
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\register_resume_task.ps1                   # 20 分
+powershell -ExecutionPolicy Bypass -File .\register_resume_task.ps1                   # 10 分
 powershell -ExecutionPolicy Bypass -File .\register_resume_task.ps1 -AwakeMinutes 60  # 時間を変える
 powershell -ExecutionPolicy Bypass -File .\register_resume_task.ps1 -Unregister
 ```

@@ -84,4 +84,4 @@ PC（有線 `イーサネット` = Realtek PCIe GbE Family Controller）で設�
   - **WOL Broadcast: オフ**（オンだとアプリが送信先を自動算出し `192.0.0.6` に送ってしまい届かない）
   - `255.255.255.255` も同じ理由で届かなかった
 - 外出先から起こすには家の中の中継（ルーターの WoL / VPN / 将来の Home Assistant）が必要
-- WoL で起きた後の再スリープ対策: `scripts/register_resume_task.ps1` でタスク `SolarResume` を登録（復帰イベントで `stay_awake.ps1 -Minutes 20`）。**Windows 上で未検証**
+- WoL で起きた後の再スリープ対策: `scripts/register_resume_task.ps1` でタスク `SolarResume` を登録（復帰イベントで `stay_awake.ps1 -Minutes 10`）。**Windows 上で未検証**

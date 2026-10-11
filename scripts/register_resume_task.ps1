@@ -17,7 +17,7 @@
     start_solar.bat と stay_awake.ps1 があるフォルダ。省略時は C:\Users\<ユーザー>\OneDrive\パワコンデータ取得
 
 .PARAMETER AwakeMinutes
-    復帰後にスリープを抑止する分数。既定は 20（復帰後に Claude などの定期タスクが動く時間を確保できればよい）。
+    復帰後にスリープを抑止する分数。既定は 10（復帰後に Claude などの定期タスクが動く時間を確保できればよい）。
 
 .PARAMETER RunNow
     登録後すぐにタスクを 1 回起動します（動作確認用）。
@@ -36,7 +36,7 @@ param(
     [string]$UserId = "$env:USERDOMAIN\$env:USERNAME",
     [string]$TaskName = 'SolarResume',
     [ValidateRange(1, 1440)]
-    [int]$AwakeMinutes = 20,
+    [int]$AwakeMinutes = 10,
     [switch]$RunNow,
     [switch]$Unregister
 )
