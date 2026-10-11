@@ -78,6 +78,10 @@ PC（有線 `イーサネット` = Realtek PCIe GbE Family Controller）で設�
 - `Set-NetAdapterPowerManagement -WakeOnMagicPacket Enabled`、`powercfg /deviceenablewake` 済み（`wake_armed` に表示される）
 - 詳細設定: Wake on Magic Packet / Shutdown Wake-On-Lan = Enabled
 - `powercfg /a`: スタンバイ (S3) 対応・モダンスタンバイ非対応 → スリープ解除タイマーも WoL も効く。高速スタートアップは無効
-- スマホアプリには MAC（PC で `Get-NetAdapter` で確認）、ブロードキャスト `255.255.255.255`、ポート 9 を登録
+- **iPhone（Mocha WOL）からスリープ解除できることを確認済み**（2026-10-11）。設定:
+  - IP Address: `192.168.71.255`（家の LAN は `192.168.68.0/22`、ルーター `192.168.68.1`）
+  - Mac Address: PC の有線アダプターの MAC（`Get-NetAdapter` で確認）/ WOL Port: `9`
+  - **WOL Broadcast: オフ**（オンだとアプリが送信先を自動算出し `192.0.0.6` に送ってしまい届かない）
+  - `255.255.255.255` も同じ理由で届かなかった
 - 外出先から起こすには家の中の中継（ルーターの WoL / VPN / 将来の Home Assistant）が必要
 - 未対応: WoL で起きた後は約 2 分で再スリープする（`stay_awake.ps1` を起動する仕組みは未実装）
